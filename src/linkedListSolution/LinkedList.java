@@ -1,7 +1,12 @@
 package linkedListSolution;
 
 public class LinkedList {
+    private int size;
     Node head;
+
+    public LinkedList(int size) {
+        this.size = 0;
+    }
 
     class Node {
         int data;
@@ -10,6 +15,7 @@ public class LinkedList {
         Node(int data) {
             this.data = data;
             this.next = null;
+            size++;
         }
     }
 
@@ -39,11 +45,22 @@ public class LinkedList {
         System.out.println("Null");
     }
 
+    //delete first
+    public void deleteFirst() {
+        if (head == null) {
+            System.out.println("this list is empty");
+            return;
+        }
+        size--;
+        head = head.next;
+    }
+
     public void deleteLast() {
         if (head == null) {
             System.out.println("this list is empty");
             return;
         }
+        size--;
         if (head.next == null) {
             head = null;
             return;
@@ -57,15 +74,17 @@ public class LinkedList {
         secondLast.next = null;
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public static void main(String[] args) {
-        LinkedList list = new LinkedList();
+        LinkedList list = new LinkedList(0);
         list.append(56);
         list.append(30);
         list.append(70);
         list.printList();
-        System.out.println("after deleting first");
-        list.deleteLast();
-        list.printList();
+        System.out.println(list.getSize());
     }
 }
 
