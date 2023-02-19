@@ -55,13 +55,12 @@ class LinkedList {
     public static void main(String[] args) {
         head = null;
         head = new Node(56);
-        head.next = new Node(30);
-        head.next.next = new Node(70);
+        head.next = new Node(70);
         System.out.println("Linked list before " +
                 "insertion: ");
         display();
 
-        int x = 40;
+        int x = 30;
         insertAtMid(x);
 
         System.out.println("\nLinked list after" +
