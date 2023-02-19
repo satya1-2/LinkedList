@@ -2,49 +2,56 @@ package linkedListSolution;
 
 public class LinkedList {
     Node head;
-
-
-    static class Node {
+    class Node {
         int data;
         Node next;
-
-        Node(int key) {
-            data = key;
-            next = null;
+        Node(int data) {
+            this.data = data;
+            this.next = null;
         }
     }
-
-    public static LinkedList insert(LinkedList list, int data) {
-        Node new_node = new Node(data);
-        if (list.head == null) {
-            list.head = new_node;
-        } else {
-            Node last = list.head;
-            while (last.next != null) {
-                last = last.next;
-            }
-            last.next = new_node;
+    public void append(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+            return;
         }
-        return list;
+        Node currentNode = head;
+        while (currentNode.next != null) {
+            currentNode = currentNode.next;
+        }
+        currentNode.next = newNode;
+    }
+    public void printList() {
+        if (head == null) {
+            System.out.println("list is empty");
+            return;
+        }
+        Node currentNode = head;
+        while (currentNode != null) {
+            System.out.print(currentNode.data + "-->");
+            currentNode = currentNode.next;
+        }
+        System.out.println("Null");
     }
 
-    public static void printList(LinkedList list) {
-        Node currNode = list.head;
-        System.out.print("LinkedList: ");
-        while (currNode != null) {
-            System.out.print(currNode.data + " ");
-            currNode = currNode.next;
+    //delete first
+    public void deleteFirst() {
+        if (head == null) {
+            System.out.println("this list is empty");
+            return;
         }
+        head = head.next;
     }
-
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
-
-        list = insert(list, 30);
-        list = insert(list, 56);
-        list = insert(list, 70);
-        printList(list);
+        list.append(56);
+        list.append(30);
+        list.append(70);
+        list.printList();
+        System.out.println("after deleting first");
+        list.deleteFirst();
+        list.printList();
     }
 }
-
 
