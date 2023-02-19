@@ -1,48 +1,62 @@
 package linkedListSolution;
 
 public class LinkedList {
-    Node head;
-
-    static class Node {
-        int data;
+    class Node {
+        int key;
         Node next;
 
-        Node(int key) {
-            data = key;
-            next = null;
+        public Node(int key) {
+            this.key = key;
+            this.next = null;
         }
     }
 
-    public static LinkedList insert(LinkedList list, int data) {
-        Node new_node = new Node(data);
-        if (list.head == null) {
-            list.head = new_node;
+    public Node head = null;
+    public Node tail = null;
+
+    public void addAtStart(int key) {
+        Node newNode = new Node(key);
+
+        //Checks if the list is empty
+        if (head == null) {
+            head = newNode;
+            tail = newNode;
         } else {
-            Node last = list.head;
-            while (last.next != null) {
-                last = last.next;
-            }
-            last.next = new_node;
+            Node temp = head;
+            head = newNode;
+            head.next = temp;
         }
-        return list;
     }
 
-    public static void printList(LinkedList list) {
-        Node currNode = list.head;
-        System.out.print("LinkedList: ");
-        while (currNode != null) {
-            System.out.print(currNode.data + " ");
-            currNode = currNode.next;
+    public void display() {
+        Node current = head;
+        if (head == null) {
+            System.out.println("List is empty");
+            return;
         }
+        System.out.println("Adding nodes  to the start of the list: ");
+        while (current != null) {
+            System.out.print(current.key + " ");
+            current = current.next;
+        }
+        System.out.println();
     }
 
     public static void main(String[] args) {
-        LinkedList list = new LinkedList();
 
-        list = insert(list, 30);
-        list = insert(list, 56);
-        list = insert(list, 70);
-        printList(list);
+        LinkedList List = new LinkedList();
+
+        //Adding 1 to the list
+        List.addAtStart(70);
+        List.display();
+
+        //Adding 2 to the list
+        List.addAtStart(30);
+        List.display();
+
+        //Adding 3 to the list
+        List.addAtStart(56);
+        List.display();
     }
 }
 
