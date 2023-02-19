@@ -1,92 +1,75 @@
 package linkedListSolution;
 
-public class LinkedList {
-    private int size;
-    Node head;
+import java.util.*;
+import java.lang.*;
+import java.io.*;
 
-    public LinkedList(int size) {
-        this.size = 0;
-    }
+class LinkedList {
+    static Node head;
 
-    class Node {
+    static class Node {
         int data;
         Node next;
 
-        Node(int data) {
-            this.data = data;
-            this.next = null;
-            size++;
+        Node(int d) {
+            data = d;
+            next = null;
         }
     }
 
-    public void append(int data) {
-        Node newNode = new Node(data);
-        if (head == null) {
-            head = newNode;
-            return;
+    static void insertAtMid(int x) {
+
+        if (head == null)
+            head = new Node(x);
+        else {
+            Node newNode = new Node(x);
+            Node ptr = head;
+            int len = 0;
+
+            while (ptr != null) {
+                len++;
+                ptr = ptr.next;
+            }
+            int count = ((len % 2) == 0) ? (len / 2) :
+                    (len + 1) / 2;
+            ptr = head;
+
+
+            while (count-- > 1)
+                ptr = ptr.next;
+
+
+            newNode.next = ptr.next;
+            ptr.next = newNode;
         }
-        Node currentNode = head;
-        while (currentNode.next != null) {
-            currentNode = currentNode.next;
-        }
-        currentNode.next = newNode;
     }
 
-    public void printList() {
-        if (head == null) {
-            System.out.println("list is empty");
-            return;
+    static void display() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
         }
-        Node currentNode = head;
-        while (currentNode != null) {
-            System.out.print(currentNode.data + "-->");
-            currentNode = currentNode.next;
-        }
-        System.out.println("Null");
-    }
-
-    //delete first
-    public void deleteFirst() {
-        if (head == null) {
-            System.out.println("this list is empty");
-            return;
-        }
-        size--;
-        head = head.next;
-    }
-
-    public void deleteLast() {
-        if (head == null) {
-            System.out.println("this list is empty");
-            return;
-        }
-        size--;
-        if (head.next == null) {
-            head = null;
-            return;
-        }
-        Node secondLast = head;
-        Node lastNode = head.next;
-        while (lastNode.next != null) {
-            lastNode = lastNode.next;
-            secondLast = secondLast.next;
-        }
-        secondLast.next = null;
-    }
-
-    public int getSize() {
-        return size;
     }
 
     public static void main(String[] args) {
-        LinkedList list = new LinkedList(0);
-        list.append(56);
-        list.append(30);
-        list.append(70);
-        list.printList();
-        System.out.println(list.getSize());
+        head = null;
+        head = new Node(56);
+        head.next = new Node(30);
+        head.next.next = new Node(70);
+        System.out.println("Linked list before " +
+                "insertion: ");
+        display();
+
+        int x = 40;
+        insertAtMid(x);
+
+        System.out.println("\nLinked list after" +
+                " insertion: ");
+        display();
     }
 }
+
 
 
 
