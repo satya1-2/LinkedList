@@ -5,72 +5,80 @@ import java.lang.*;
 import java.io.*;
 
 class LinkedList {
-    static Node head;
+        Node head; // head of list
 
-    static class Node {
-        int data;
-        Node next;
-
-        Node(int d) {
-            data = d;
-            next = null;
-        }
-    }
-
-    static void insertAtMid(int x) {
-
-        if (head == null)
-            head = new Node(x);
-        else {
-            Node newNode = new Node(x);
-            Node ptr = head;
-            int len = 0;
-
-            while (ptr != null) {
-                len++;
-                ptr = ptr.next;
+        /* Linked list Node*/
+        class Node {
+            int data;
+            Node next;
+            Node(int d)
+            {
+                data = d;
+                next = null;
             }
-            int count = ((len % 2) == 0) ? (len / 2) :
-                    (len + 1) / 2;
-            ptr = head;
+        }
 
+        /* function to insert a
+    new_node in a list. */
+        void sortedInsert(Node new_node)
+        {
+            Node current;
 
-            while (count-- > 1)
-                ptr = ptr.next;
+            /* Special case for head node */
+            if (head == null || head.data
+                    >= new_node.data) {
+                new_node.next = head;
+                head = new_node;
+            }
+            else {
 
+                /* Locate the node before point of insertion. */
+                current = head;
 
-            newNode.next = ptr.next;
-            ptr.next = newNode;
+                while (current.next != null
+                        && current.next.data < new_node.data) {
+
+                    current = current.next;
+                }
+
+                new_node.next = current.next;
+                current.next = new_node;
+            }
+        }
+
+        /*Utility functions*/
+
+        /* Function to create a node */
+        Node newNode(int data)
+        {
+            Node x = new Node(data);
+            return x;
+        }
+
+        /* Function to print linked list */
+        void printList()
+        {
+            Node temp = head;
+            while (temp != null) {
+                System.out.print(temp.data + " ");
+                temp = temp.next;
+            }
+        }
+
+        /* Driver function to test above methods */
+        public static void main(String args[])
+        {
+            LinkedList llist = new LinkedList();
+            Node new_node;
+            new_node = llist.newNode(56);
+            llist.sortedInsert(new_node);
+            new_node = llist.newNode(30);
+            llist.sortedInsert(new_node);
+            new_node = llist.newNode(40);
+            llist.sortedInsert(new_node);
+            new_node = llist.newNode(70);
+            llist.sortedInsert(new_node);
+            System.out.println("sorted Linked List");
+            llist.printList();
         }
     }
-
-    static void display() {
-        Node temp = head;
-        while (temp != null) {
-            System.out.print(temp.data + " ");
-            temp = temp.next;
-        }
-    }
-
-    public static void main(String[] args) {
-        head = null;
-        head = new Node(56);
-        head.next = new Node(70);
-        System.out.println("Linked list before " +
-                "insertion: ");
-        display();
-
-        int x = 30;
-        insertAtMid(x);
-
-        System.out.println("\nLinked list after" +
-                " insertion: ");
-        display();
-    }
-}
-
-
-
-
-
-
