@@ -3,51 +3,47 @@ package linkedListSolution;
 public class LinkedList {
     Node head;
 
-    class Node {
+
+    static class Node {
         int data;
         Node next;
 
-        Node(int data) {
-            this.data = data;
-            this.next = null;
+        Node(int key) {
+            data = key;
+            next = null;
         }
     }
 
-    public void append(int data) {
-        Node newNode = new Node(data);
-        if (head == null) {
-            head = newNode;
-            return;
+    public static LinkedList insert(LinkedList list, int data) {
+        Node new_node = new Node(data);
+        if (list.head == null) {
+            list.head = new_node;
+        } else {
+            Node last = list.head;
+            while (last.next != null) {
+                last = last.next;
+            }
+            last.next = new_node;
         }
-        Node currentNode = head;
-        while (currentNode.next != null) {
-            currentNode = currentNode.next;
-        }
-        currentNode.next = newNode;
+        return list;
     }
 
-    public void printList() {
-        if (head == null) {
-            System.out.println("list is empty");
-            return;
+    public static void printList(LinkedList list) {
+        Node currNode = list.head;
+        System.out.print("LinkedList: ");
+        while (currNode != null) {
+            System.out.print(currNode.data + " ");
+            currNode = currNode.next;
         }
-        Node currentNode = head;
-        while (currentNode != null) {
-            System.out.print(currentNode.data + "-->");
-            currentNode = currentNode.next;
-        }
-        System.out.println("Null");
     }
 
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
-        System.out.println("aFter append linkedlist is :-");
-        list.append(56);
-        list.append(30);
-        list.append(70);
-        list.printList();
 
-
+        list = insert(list, 30);
+        list = insert(list, 56);
+        list = insert(list, 70);
+        printList(list);
     }
 }
 
