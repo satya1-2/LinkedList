@@ -1,62 +1,53 @@
 package linkedListSolution;
 
 public class LinkedList {
+    Node head;
+
     class Node {
-        int key;
+        int data;
         Node next;
 
-        public Node(int key) {
-            this.key = key;
+        Node(int data) {
+            this.data = data;
             this.next = null;
         }
     }
 
-    public Node head = null;
-    public Node tail = null;
-
-    public void addAtStart(int key) {
-        Node newNode = new Node(key);
-
-        //Checks if the list is empty
+    public void append(int data) {
+        Node newNode = new Node(data);
         if (head == null) {
             head = newNode;
-            tail = newNode;
-        } else {
-            Node temp = head;
-            head = newNode;
-            head.next = temp;
-        }
-    }
-
-    public void display() {
-        Node current = head;
-        if (head == null) {
-            System.out.println("List is empty");
             return;
         }
-        System.out.println("Adding nodes  to the start of the list: ");
-        while (current != null) {
-            System.out.print(current.key + " ");
-            current = current.next;
+        Node currentNode = head;
+        while (currentNode.next != null) {
+            currentNode = currentNode.next;
         }
-        System.out.println();
+        currentNode.next = newNode;
+    }
+
+    public void printList() {
+        if (head == null) {
+            System.out.println("list is empty");
+            return;
+        }
+        Node currentNode = head;
+        while (currentNode != null) {
+            System.out.print(currentNode.data + "-->");
+            currentNode = currentNode.next;
+        }
+        System.out.println("Null");
     }
 
     public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+        System.out.println("aFter append linkedlist is :-");
+        list.append(56);
+        list.append(30);
+        list.append(70);
+        list.printList();
 
-        LinkedList List = new LinkedList();
 
-        //Adding 1 to the list
-        List.addAtStart(70);
-        List.display();
-
-        //Adding 2 to the list
-        List.addAtStart(30);
-        List.display();
-
-        //Adding 3 to the list
-        List.addAtStart(56);
-        List.display();
     }
 }
 
